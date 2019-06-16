@@ -14,7 +14,7 @@ $ go get -u github.com/sudoLife/shopify
 import (
 	"encoding/json"
 	"os"
-	"shopify"
+	"github.com/sudoLife/shopify"
 )
 
 func main() {
