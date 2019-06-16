@@ -47,7 +47,6 @@ func Parse(url string) *[]Review {
 	})
 
 	c.OnHTML("div.review-listing", func(e *colly.HTMLElement) {
-		fmt.Printf("=")
 		var err error
 		rating, _ := strconv.Atoi(e.ChildAttr("div[data-review-id] div.review-metadata div:nth-child(1) div.review-metadata__item-value div[data-rating]", "data-rating"))
 		helpful, _ := strconv.Atoi(e.ChildText("div.review-footer div.review-helpfulness form button span.review-helpfulness__helpful-count"))
@@ -82,6 +81,7 @@ func Parse(url string) *[]Review {
 	})
 
 	c.OnHTML("a.search-pagination__next-page-text", func(e *colly.HTMLElement) {
+		fmt.Printf("=")
 		e.Request.Visit(e.Request.AbsoluteURL(e.Attr("href")))
 	})
 
