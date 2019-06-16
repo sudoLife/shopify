@@ -8,10 +8,22 @@ Shopify reviews crawler
 $ go get -u github.com/sudoLife/shopify
 ```
 
-### Usage
+### Example
 
 ``` go
-import "shopify"
+import (
+	"encoding/json"
+	"os"
+	"shopify"
+)
+
+func main() {
+	reviews := shopify.Parse("https://apps.shopify.com/YourApp/reviews")
+	enc := json.NewEncoder(os.Stdout)
+	enc.SetIndent("", " ")
+	
+	enc.Encode(reviews)
+}
 ```
 
 ### Third party libraries
