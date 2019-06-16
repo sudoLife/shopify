@@ -48,31 +48,27 @@ func Parse(url string) *[]Review {
 
 	c.OnHTML("div.review-listing", func(e *colly.HTMLElement) {
 		var err error
-		rating, _ := strconv.Atoi(e.ChildAttr("div[data-review-id] div.review-metadata div:nth-child(1) div.review-metadata__item-value div[data-rating]", "data-rating"))
-		helpful, _ := strconv.Atoi(e.ChildText("div.review-footer div.review-helpfulness form button span.review-helpfulness__helpful-count"))
+		var review Review
+		review.Username = e.ChildText("div[data-review-id] div.review-listing-header h3")
+		review.Content = strings.TrimSpace(e.ChildText("div[data-review-id] div.review-content div.truncate-content-copy"))
+		review.Rating, _ = strconv.Atoi(e.ChildAttr("div[data-review-id] div.review-metadata div:nth-child(1) div.review-metadata__item-value div[data-rating]", "data-rating"))
+		review.Helpful, _ = strconv.Atoi(e.ChildText("div.review-footer div.review-helpfulness form button span.review-helpfulness__helpful-count"))
+		review.Reply = strings.TrimSpace(e.ChildText("div.review-reply div.review-content div.truncate-content-copy p"))
 		date, err := time.Parse(DateFormat, strings.TrimSpace(e.ChildText("div[data-review-id] div.review-metadata div:nth-child(2) div.review-metadata__item-value")))
 
 		if err != nil {
 			log.Fatal(err)
 		}
 
+		review.Date = date.Unix()
+
 		replyDate, err := time.Parse(DateFormat, strings.TrimSpace(e.ChildText("div.review-reply div.review-reply__header div.review-reply__header-item")))
 
-		if err != nil {
-			replyDate, _ = time.Parse(DateFormat, "January 1, 1970")
+		if err == nil {
+			review.ReplyDate = replyDate.Unix()
 		}
 
-		//		replyDate := strings.TrimSpace(e.ChildText("div.review-reply div.review-reply__header div.review-reply__header-item"))
-
-		reviews = append(reviews, Review{
-			Username:  e.ChildText("div[data-review-id] div.review-listing-header h3"),
-			Rating:    rating,
-			Date:      date.Unix(),
-			Content:   strings.TrimSpace(e.ChildText("div[data-review-id] div.review-content div.truncate-content-copy")),
-			Helpful:   helpful,
-			Reply:     strings.TrimSpace(e.ChildText("div.review-reply div.review-content div.truncate-content-copy p")),
-			ReplyDate: replyDate.Unix(),
-		})
+		reviews = append(reviews, review)
 
 	})
 
