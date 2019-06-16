@@ -3,9 +3,15 @@ Shopify reviews crawler
 ***Shopify reviews crawler*** fetches all reviews of an app from apps.shopify.com
 
 ### Installation
-```
-$ go get -u github.com/sudoLife/shopify
 
+``` shell
+$ go get -u github.com/sudoLife/shopify
+```
+
+### Usage
+
+``` go
+import "shopify"
 ```
 
 ### Third party libraries
