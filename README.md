@@ -1,5 +1,6 @@
 Shopify reviews crawler
 ======
+[![Go Report Card](https://goreportcard.com/badge/github.com/sudoLife/shopify)](https://goreportcard.com/report/github.com/sudoLife/shopify)
 ***Shopify reviews crawler*** fetches all reviews of an app from [Shopify app store](https://apps.shopify.com/)
 
 ### Installation
