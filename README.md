@@ -11,7 +11,7 @@ Shopify reviews crawler
 $ go get -u github.com/sudoLife/shopify
 ```
 
-### Example
+### Example Code
 
 ``` go
 import (
@@ -27,6 +27,12 @@ func main() {
 	
 	enc.Encode(reviews)
 }
+```
+### Usage
+
+After above code has been saved as something like *get-reviews.go*, run the following command to scrape the data in JSON:
+``` shell
+$ go run get-reviews.go
 ```
 
 ### Third party libraries
