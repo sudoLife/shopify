@@ -54,7 +54,13 @@ func Parse(url string) *[]Review {
 		review.Rating, _ = strconv.Atoi(e.ChildAttr("div[data-review-id] div.review-metadata div:nth-child(1) div.review-metadata__item-value div[data-rating]", "data-rating"))
 		review.Helpful, _ = strconv.Atoi(e.ChildText("div.review-footer div.review-helpfulness form button span.review-helpfulness__helpful-count"))
 		review.Reply = strings.TrimSpace(e.ChildText("div.review-reply div.review-content div.truncate-content-copy p"))
-		date, err := time.Parse(DateFormat, strings.TrimSpace(e.ChildText("div[data-review-id] div.review-metadata div:nth-child(2) div.review-metadata__item-value")))
+		dateStr := strings.TrimSpace(e.ChildText("div[data-review-id] div.review-metadata  div.review-metadata__item-label"))
+
+		if strings.Contains(dateStr, "Edited ") {
+			dateStr = strings.ReplaceAll(dateStr, "Edited ", "")
+		}
+
+		date, err := time.Parse(DateFormat, dateStr)
 
 		if err != nil {
 			log.Fatal(err)
