@@ -25,6 +25,7 @@ type Review struct {
 	Rating    int                `json:"rating,omitempty" bson:"rating,omitempty"`
 	Date      int64              `json:"time,omitempty" bson:"time,omitempty"`
 	Content   string             `json:"content,omitempty" bson:"content,omitempty"`
+    Edited    bool               `json:"edited,omitempty" bson:"edited,omitempty"`
 	Helpful   int                `json:"helpful,omitempty" bson:"helpful,omitempty"`
 	Reply     string             `json:"reply,omitempty" bson:"reply,omitempty"`
 	ReplyDate int64              `json:"replydate,omitempty" bson:"replydate,omitempty"`
@@ -58,6 +59,7 @@ func Parse(url string) *[]Review {
 
 		if strings.Contains(dateStr, "Edited ") {
 			dateStr = strings.ReplaceAll(dateStr, "Edited ", "")
+            review.Edited = true
 		}
 
 		date, err := time.Parse(DateFormat, dateStr)
