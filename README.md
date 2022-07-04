@@ -1,6 +1,8 @@
 Shopify reviews crawler
 ======
-[![Go Report Card](https://goreportcard.com/badge/github.com/sudoLife/shopify)](https://goreportcard.com/report/github.com/sudoLife/shopify)
+[![Go Report Card](https://goreportcard.com/badge/github.com/sudoLife/shopify)](https://goreportcard.com/report/github.com/sudoLife/shopify)  
+
+<a href="https://www.buymeacoffee.com/sudoLife" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
 
 
 ***Shopify reviews crawler*** fetches all reviews of an app from [Shopify app store](https://apps.shopify.com/)
